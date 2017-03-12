@@ -9,7 +9,7 @@ public class SampleController {
 	@GetMapping("/chitmaster/getname")
 	public String getName(){
 		
-		return "Vishal-Shruthi";
+		return "Vishal-Shruthi.";
 	}
 	
 }
