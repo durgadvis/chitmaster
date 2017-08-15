@@ -1,0 +1,46 @@
+
+<h2>  Create Group</h2>
+<div class="container">
+    <form [formGroup]="createGroupForm" novalidate (ngSubmit)="createGroup()">
+        <!-- we will place our fields here -->
+    <div class="form-group">
+        <label>Group Name</label>
+        <input type="text" formControlName="groupname">
+        <!--display error message if name is not valid-->
+        <small *ngIf="!createGroupForm.controls.groupname.valid" class="text-danger">
+            Name is required.
+        </small>
+    </div>
+
+    <!-- list of members -->
+    <div formArrayName="members">
+        <div *ngFor="let member of createGroupForm.controls.members.controls; let i=index">
+            <!-- address header, show remove button when more than one address available -->
+            <div>
+                <span>Member {{i + 1}}</span>
+                <span *ngIf="createGroupForm.controls.members.controls.length > 1" (click)="removeMembers(i)">
+                </span>
+            </div>
+
+            <!-- Angular assigns array index as group name by default 0, 1, 2, ... -->
+            <div [formGroupName]="i">
+                <!--street-->
+                <div>
+                    <label>Email Id</label>
+                    <input type="text" formControlName="emailId">
+                    <!--display error message if street is not valid-->
+                    <small [hidden]="createGroupForm.controls.members.controls[i].controls.emailId.valid">
+                        Email Id is required
+                    </small>
+                </div>
+                           
+            </div>
+        </div>
+    </div>
+    <button type="button" (click)="addMembers()">Add</button>
+    <button type="submit" [disabled]="!createGroupForm.valid">Submit</button>
+
+    </form>
+</div>
+
+  
