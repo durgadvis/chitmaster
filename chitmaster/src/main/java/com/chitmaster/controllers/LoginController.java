@@ -11,10 +11,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.chitmaster.dto.UserDto;
 import com.chitmaster.entity.Register;
 import com.chitmaster.security.ChitMasterJwtAuthenticationProvider;
 import com.chitmaster.security.ChitMasterJwtTokenUtil;
@@ -42,17 +45,16 @@ public class LoginController {
 	}
 	
 	@PostMapping("/login")
-	public ModelAndView verifyLogin(@RequestParam String userId, @RequestParam String password, @RequestParam String emailId, 
-			HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public @ResponseBody ChitMasterJwtUser verifyLogin(@RequestBody UserDto userDto, HttpServletResponse response) throws IOException {
 		
-		ModelAndView modelAndView = new ModelAndView("dashboard");
+		ChitMasterJwtUser user=null;
 
-		if (!loginService.isUserCredentialValid(userId, password, emailId)) {
+		if (!loginService.isUserCredentialValid( userDto.getUsername(), userDto.getPassword())) {
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
 		}
 		
 		try {
-			ChitMasterJwtUser user = new ChitMasterJwtUser(userId, emailId, password);
+			 user = new ChitMasterJwtUser(userDto.getUsername(), userDto.getPassword());
 			jwtTokenUtil.createAuthoritiesForUser(user);
 			final String generatedToken = jwtTokenUtil.generateTokenForUser(user);
 			user.setToken(generatedToken);
@@ -60,11 +62,11 @@ public class LoginController {
 			final Authentication authentication = authenticationManager.authenticate(jwtTokenUtil.createJwtAuthToken(user));
 	        SecurityContextHolder.getContext().setAuthentication(authentication);
 
-			modelAndView.addObject("loggedInUser", user);
+			
 		} catch (Exception exception) {
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
 		}
-		return modelAndView;
+		return user;
 	}
 
 	@GetMapping("/signup")

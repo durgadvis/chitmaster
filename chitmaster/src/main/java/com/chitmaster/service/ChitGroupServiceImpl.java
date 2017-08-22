@@ -22,7 +22,6 @@ public class ChitGroupServiceImpl implements ChitGroupService {
 	@Inject
 	private ObjectEntityManager entityManager;
 
-	@Override
 	public List<String> createChitGroupAndInitialize(ChitGroup chitGroup, List<String> emailIdList) {
 		setDefaultParameters(chitGroup, emailIdList.size());
 		persistenceManager.saveObject(chitGroup);
@@ -65,7 +64,6 @@ public class ChitGroupServiceImpl implements ChitGroupService {
 		return userToAdd;
 	}
 
-	@Override
 	public List<String> retrieveMissingUserList(List<String> emailIdList) {
 		List<String> currentEmailIdList = entityManager.getEmailIdListOfCurrentUsers();
 		emailIdList.removeAll(currentEmailIdList);

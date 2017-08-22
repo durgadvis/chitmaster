@@ -72,11 +72,9 @@ public class ChitMasterJwtTokenUtil {
 
 			ChitMasterJwtUser user = new ChitMasterJwtUser();
 			user.setUsername(body.getSubject());
-			user.setEmail((String)body.get("email"));
 
 			System.out.println("Getting user " + user);
 			System.out.println("Getting user name " + user.getUsername());
-			System.out.println("Getting user email " + user.getEmail());
 			return user;
 
 		} catch (JwtException e) {
@@ -99,7 +97,6 @@ public class ChitMasterJwtTokenUtil {
 		Date expirationDate = DateUtils.addMonths(new Date(), 1);
 
 		Claims claims = Jwts.claims().setSubject(user.getUsername());
-		claims.put("email", user.getEmail());
 
 		return Jwts.builder()
 				.setClaims(claims)
@@ -110,7 +107,7 @@ public class ChitMasterJwtTokenUtil {
 	}
 
 	public Authentication createJwtAuthToken(ChitMasterJwtUser user) {
-		JwtAuthenticationToken token = new JwtAuthenticationToken(user.getAuthorities(), user.getEmail(), user.getUsername(), user.getToken());
+		JwtAuthenticationToken token = new JwtAuthenticationToken(user.getAuthorities(),  user.getUsername(), user.getToken());
 		return token;
 	}
 }

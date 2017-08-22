@@ -8,6 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.DateDeserializers.DateDeserializer;
+import com.fasterxml.jackson.databind.ser.std.DateSerializer;
+
 @Entity
 @Table(name="CHIT_GROUP")
 public class ChitGroup {
@@ -72,27 +77,30 @@ public class ChitGroup {
 	public void setMaxPercentBidding(double maxPercentBidding) {
 		this.maxPercentBidding = maxPercentBidding;
 	}
-	
+	@JsonSerialize(using=DateSerializer.class)
 	public Date getDateofBidding() {
 		return dateofBidding;
 	}
-	
+	@JsonDeserialize(using=DateDeserializer.class)
 	public void setDateofBidding(Date dateofBidding) {
 		this.dateofBidding = dateofBidding;
 	}
 	
+	@JsonSerialize(using=DateSerializer.class)
 	public Date getStartDate() {
 		return startDate;
 	}
 	
+	@JsonDeserialize(using=DateDeserializer.class)
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
-	
+	@JsonSerialize(using=DateSerializer.class)
 	public Date getEndDate() {
 		return endDate;
 	}
 	
+	@JsonDeserialize(using=DateDeserializer.class)
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}

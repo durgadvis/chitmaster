@@ -11,9 +11,9 @@
     <global-method-security pre-post-annotations="enabled" />
     
     <http pattern="/login" security="none"/>
-    <http pattern="/signup" security="none"/>
+    <http pattern="/*" security="none"/>
 
-    <http pattern="/**" entry-point-ref="restAuthenticationEntryPoint" create-session="stateless">
+    <http pattern="/asda" entry-point-ref="restAuthenticationEntryPoint" create-session="stateless">
         <csrf disabled="true"/>
         <custom-filter before="FORM_LOGIN_FILTER" ref="chitMasterJwtAuthenticationFilter"/>
     </http>

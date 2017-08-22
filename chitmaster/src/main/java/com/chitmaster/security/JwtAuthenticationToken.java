@@ -9,8 +9,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 public class JwtAuthenticationToken extends UsernamePasswordAuthenticationToken {
 
 	private static final long serialVersionUID = -3425157378798788584L;
-	private String userId;
-	private String name;
+	private String username;
 	private String token;
 
 	public JwtAuthenticationToken(String token) {
@@ -18,11 +17,10 @@ public class JwtAuthenticationToken extends UsernamePasswordAuthenticationToken 
 		this.token = token;
 	}
 
-	public JwtAuthenticationToken(Collection<? extends GrantedAuthority> authorities, String userId, String name, String token) {
-		super(name, "N/A", authorities);
-		this.userId = userId;
+	public JwtAuthenticationToken(Collection<? extends GrantedAuthority> authorities,String  username, String token) {
+		super(username, "N/A", authorities);
 		this.token = token;
-		this.name = name;
+		this.username = username;
 		//setAuthenticated(true);
 	}
 
@@ -33,14 +31,12 @@ public class JwtAuthenticationToken extends UsernamePasswordAuthenticationToken 
 
 	@Override
 	public Object getPrincipal() {
-		return name;
+		return username;
 	}
 
 	public String getToken() {
 		return token;
 	}
 
-	public String getUserId() {
-		return userId;
-	}
+	
 }
