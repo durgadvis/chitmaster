@@ -33,13 +33,13 @@ ngOnInit(){
 
 onSubmit(){
         console.log("hi it is here"+  JSON.stringify(this.loginForm.value)) ;
-       // this.loginService.authenticate(this.loginForm.value).subscribe(
-      //      data  => {
+       this.loginService.authenticate(this.loginForm.value).subscribe(
+            data  => {
                         this.router.navigate(["dashboard"]);
-        //    },
-          //  error => {
-            //    console.log("Error for the User");
-            //});
+            },
+            error => {
+                console.log("Error for the User");
+            });
        
 
 }

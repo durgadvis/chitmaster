@@ -8,3 +8,13 @@ h1 {
   width : 200px;
   margin-top:20px;
 }
+
+.chitcontainer{
+  padding-bottom: 20px;
+  font-size: 13px;
+  }
+
+.chitFormcontrol{
+  height : 25px !important;
+  width : 90%;
+}

@@ -1,46 +1,107 @@
 
 <h2>  Create Group</h2>
-<div class="container">
-    <form [formGroup]="createGroupForm" novalidate (ngSubmit)="createGroup()">
-        <!-- we will place our fields here -->
-    <div class="form-group">
-        <label>Group Name</label>
-        <input type="text" formControlName="groupname">
-        <!--display error message if name is not valid-->
-        <small *ngIf="!createGroupForm.controls.groupname.valid" class="text-danger">
-            Name is required.
-        </small>
-    </div>
-
-    <!-- list of members -->
-    <div formArrayName="members">
-        <div *ngFor="let member of createGroupForm.controls.members.controls; let i=index">
-            <!-- address header, show remove button when more than one address available -->
-            <div>
-                <span>Member {{i + 1}}</span>
-                <span *ngIf="createGroupForm.controls.members.controls.length > 1" (click)="removeMembers(i)">
-                </span>
-            </div>
-
-            <!-- Angular assigns array index as group name by default 0, 1, 2, ... -->
-            <div [formGroupName]="i">
-                <!--street-->
-                <div>
-                    <label>Email Id</label>
-                    <input type="text" formControlName="emailId">
-                    <!--display error message if street is not valid-->
-                    <small [hidden]="createGroupForm.controls.members.controls[i].controls.emailId.valid">
-                        Email Id is required
+<div class="container chitcontainer">
+    <div class="row">
+       <div class="col-md-6">
+            <form [formGroup]="createGroupForm" novalidate (ngSubmit)="createGroup()">
+                    <!-- we will place our fields here -->
+                <div class="form-group">
+                    <label>Chit Group Name</label>
+                    <input type="text" class="form-control chitFormcontrol" formControlName="chitGroupName">
+                    <!--display error message if name is not valid-->
+                    <small *ngIf="!createGroupForm.controls.chitGroupName.valid" class="text-danger">
+                        Name is required.
                     </small>
                 </div>
-                           
+                <div class="form-group">
+                    <label>Chit Value</label>
+                    <input type="text" class="form-control chitFormcontrol" formControlName="chitValue">
+                    <!--display error message if name is not valid-->
+                    <small *ngIf="!createGroupForm.controls.chitValue.valid" class="text-danger">
+                        Please enter the total amount.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label>Commission Percent</label>
+                    <input type="text" class="form-control chitFormcontrol" formControlName="commissionPercent">
+                    <!--display error message if name is not valid-->
+                    <small *ngIf="!createGroupForm.controls.commissionPercent.valid" class="text-danger">
+                        CommissionPercent is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label>MinPercentBidding</label>
+                    <input type="text" class="form-control chitFormcontrol" formControlName="minPercentBidding">
+                    <!--display error message if name is not valid-->
+                    <small *ngIf="!createGroupForm.controls.minPercentBidding.valid" class="text-danger">
+                        Enter min percentage.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label>MaxPercentBidding</label>
+                    <input type="text" class="form-control chitFormcontrol" formControlName="maxPercentBidding">
+                    <!--display error message if name is not valid-->
+                    <small *ngIf="!createGroupForm.controls.maxPercentBidding.valid" class="text-danger">
+                    Enter Max percentage.
+                    </small>
             </div>
-        </div>
-    </div>
-    <button type="button" (click)="addMembers()">Add</button>
-    <button type="submit" [disabled]="!createGroupForm.valid">Submit</button>
+                <div class="form-group">
+                    <label>Date of Bidding</label>
+                    <input type="text" class="form-control chitFormcontrol" formControlName="dateofBidding">
+                    <!--display error message if name is not valid-->
+                    <small *ngIf="!createGroupForm.controls.dateofBidding.valid" class="text-danger">
+                    Enter Date of biding.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label>Start Date</label>
+                    <input type="text" class="form-control chitFormcontrol" formControlName="startDate">
+                    <!--display error message if name is not valid-->
+                    <small *ngIf="!createGroupForm.controls.startDate.valid" class="text-danger">
+                        Enter Start Date.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label>End Date</label>
+                    <input type="text" class="form-control chitFormcontrol" formControlName="endDate">
+                    <!--display error message if name is not valid-->
+                    <small *ngIf="!createGroupForm.controls.endDate.valid" class="text-danger">
+                        Enter End Date.
+                    </small>
+                </div>
 
-    </form>
+
+                <!-- list of members -->
+                <div formArrayName="members">
+                    <div *ngFor="let member of createGroupForm.controls.members.controls; let i=index">
+                        <!-- address header, show remove button when more than one address available -->
+                        <div>
+                            <span>Member {{i + 1}}</span>
+                            <span *ngIf="createGroupForm.controls.members.controls.length > 1" (click)="removeMembers(i)"> Remove
+                            </span>
+                        </div>
+
+                        <!-- Angular assigns array index as group name by default 0, 1, 2, ... -->
+                        <div [formGroupName]="i">
+                            <!--street-->
+                            <div>
+                                <label>Email Id</label>
+                                <input type="text" class="form-control chitFormcontrol" formControlName="emailId">
+                                <!--display error message if street is not valid-->
+                                <small [hidden]="createGroupForm.controls.members.controls[i].controls.emailId.valid">
+                                    Email Id is required
+                                </small>
+                            </div>
+                                    
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-success" (click)="addMembers()">Add</button>
+                <button type="submit" class="btn btn-success" [disabled]="!createGroupForm.valid">Submit</button>
+
+            </form>
+       </div>    
+    </div>
 </div>
 
   
