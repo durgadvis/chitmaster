@@ -1,16 +1,11 @@
 package com.chitmaster.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -21,13 +16,13 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int userId;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="emailId")
 	private Register register;
 
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="USER_CHITGROUP", joinColumns=@JoinColumn(name="userId"), inverseJoinColumns=@JoinColumn(name="chitGroupId"))
-	private List<ChitGroup> chitGroups = new ArrayList<ChitGroup>();
+	@OneToOne
+	@JoinColumn(name="chitGroupId")
+	private ChitGroup chitGroup;
 	
 	private boolean isHost;
 	
@@ -49,12 +44,12 @@ public class User {
 		this.register = register;
 	}
 
-	public List<ChitGroup> getChitGroups() {
-		return chitGroups;
+	public ChitGroup getChitGroup() {
+		return chitGroup;
 	}
 
-	public void setChitGroups(List<ChitGroup> chitGroups) {
-		this.chitGroups = chitGroups;
+	public void setChitGroup(ChitGroup chitGroup) {
+		this.chitGroup = chitGroup;
 	}
 
 	public boolean isHost() {

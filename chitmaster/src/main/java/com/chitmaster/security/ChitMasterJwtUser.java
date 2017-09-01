@@ -12,8 +12,6 @@ public class ChitMasterJwtUser implements UserDetails {
 	private static final long serialVersionUID = 1455167962335555187L;
 	private String username;
 	private String password;
-	
-    
 	private Collection<? extends GrantedAuthority> authorities;
     private String token;
 

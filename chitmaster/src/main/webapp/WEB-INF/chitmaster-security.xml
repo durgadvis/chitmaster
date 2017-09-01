@@ -13,6 +13,8 @@
     <http pattern="/login" security="none"/>
     <http pattern="/*" security="none"/>
 
+	<beans:bean id="corsSource" class="org.springframework.web.cors.UrlBasedCorsConfigurationSource" />
+
     <http pattern="/asda" entry-point-ref="restAuthenticationEntryPoint" create-session="stateless">
         <csrf disabled="true"/>
         <custom-filter before="FORM_LOGIN_FILTER" ref="chitMasterJwtAuthenticationFilter"/>

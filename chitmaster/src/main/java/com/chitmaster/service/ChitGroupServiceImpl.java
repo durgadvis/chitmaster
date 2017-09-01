@@ -55,7 +55,7 @@ public class ChitGroupServiceImpl implements ChitGroupService {
 
 	private User createAndSaveUser(ChitGroup chitGroup, Register register) {
 		User userToAdd = new User();
-		userToAdd.getChitGroups().add(chitGroup);
+		userToAdd.setChitGroup(chitGroup);
 		userToAdd.setCompletedBidding(false);
 		userToAdd.setHost(false);
 		userToAdd.setRegister(register);

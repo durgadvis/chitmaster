@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,26 +44,18 @@ public class LoginController {
 		
 		return modelAndView;
 	}
-	
+
 	@PostMapping("/login")
 	public @ResponseBody ChitMasterJwtUser verifyLogin(@RequestBody UserDto userDto, HttpServletResponse response) throws IOException {
 		
-		ChitMasterJwtUser user=null;
+		ChitMasterJwtUser user = null;
 
-		if (!loginService.isUserCredentialValid( userDto.getUsername(), userDto.getPassword())) {
+		if (!loginService.isUserCredentialValid(userDto.getUsername(), userDto.getPassword())) {
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
 		}
 		
 		try {
-			 user = new ChitMasterJwtUser(userDto.getUsername(), userDto.getPassword());
-			jwtTokenUtil.createAuthoritiesForUser(user);
-			final String generatedToken = jwtTokenUtil.generateTokenForUser(user);
-			user.setToken(generatedToken);
-			
-			final Authentication authentication = authenticationManager.authenticate(jwtTokenUtil.createJwtAuthToken(user));
-	        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-			
+			user = loginService.generateTokenOnLogin(userDto.getUsername(), userDto.getPassword());
 		} catch (Exception exception) {
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
 		}
@@ -78,9 +71,15 @@ public class LoginController {
 	}
 	
 	@PostMapping("/signup")
-	public ModelAndView createUserOnSignup(@ModelAttribute Register user) throws IOException {
+	public @ResponseBody ChitMasterJwtUser createUserOnSignup(@RequestBody Register user, HttpServletResponse response) throws IOException {
 		loginService.addUser(user);
-		return new ModelAndView("redirect:login");
+		ChitMasterJwtUser jwtUser = null;
+		try {
+			jwtUser = loginService.generateTokenOnLogin(user.getEmailId(),user.getPassword());
+		} catch(Exception exception) {
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+		}
+		return jwtUser;
 	}
 	
 }
