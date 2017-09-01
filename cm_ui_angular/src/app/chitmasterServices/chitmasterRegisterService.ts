@@ -11,9 +11,15 @@ export class chitmasterRegisterService {
     
     pushUser(registerUser:RegisterUser){
         console.log("submittin user  "+JSON.stringify(registerUser));
-        const url:string="http://localhost:8080/chitmaster/saveChitMasterUser";
+        const url:string="http://localhost:8080/chitmaster/signup";
         return this._http.post(url,JSON.stringify(registerUser),{headers:this.headers,withCredentials:false}).
-        map((response:Response) => response.json());
+        map((response:Response) => {
+            let user = response.json();
+            if(user && user.token){
+                localStorage.setItem('curruser',JSON.stringify(response.json().token));
+            }
+            
+            });
     }
      
 }

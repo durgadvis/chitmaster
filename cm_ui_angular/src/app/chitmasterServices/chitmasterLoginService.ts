@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class chitmasterLoginService {
-    private headers = new Headers({'content-type': 'application/json'});
+    private headers = new Headers({'Content-type': 'application/json'});
 
     constructor(private _http : Http){}
     
