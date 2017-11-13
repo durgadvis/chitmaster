@@ -3,11 +3,13 @@ package com.chitmaster.dto;
 import java.util.Date;
 import java.util.List;
 
-public class ChitGroupDto {
-	
-	private int id;
-	private String name;
-	private List<String> emailIdList;
+import com.chitmaster.entity.PremiumDetails;
+import com.chitmaster.entity.User;
+
+public class ChitGroupPremiumDetailsDto {
+
+	private int chitGroupId;
+	private String groupName;
 	private double chitValue;
 	private double commissionPercent;
 	private double minPercentBidding;
@@ -15,27 +17,23 @@ public class ChitGroupDto {
 	private Date dateofBidding;
 	private Date startDate;
 	private Date endDate;
-
-	public int getId() {
-		return id;
+	
+	private List<PremiumDetails> listPremiumDetails;
+	
+	public int getChitGroupId() {
+		return chitGroupId;
 	}
-
-	public void setId(int chitGroupId) {
-		this.id = chitGroupId;
+	public void setChitGroupId(int chitGroupId) {
+		this.chitGroupId = chitGroupId;
 	}
-
+	
 	public String getName() {
-		return name;
+		return groupName;
 	}
 	public void setName(String name) {
-		this.name = name;
+		this.groupName = name;
 	}
-	public List<String> getEmailIdList() {
-		return emailIdList;
-	}
-	public void setEmailIdList(List<String> emailIdList) {
-		this.emailIdList = emailIdList;
-	}
+	
 	public double getChitValue() {
 		return chitValue;
 	}
@@ -78,5 +76,18 @@ public class ChitGroupDto {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-
+	public String getGroupName() {
+		return groupName;
+	}
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
+	}
+	public List<PremiumDetails> getListPremiumDetails() {
+		return listPremiumDetails;
+	}
+	public void setListPremiumDetails(List<PremiumDetails> listPremiumDetails) {
+		this.listPremiumDetails = listPremiumDetails;
+	}
+	
+	
 }

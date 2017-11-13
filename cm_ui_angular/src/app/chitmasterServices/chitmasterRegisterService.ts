@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 export class chitmasterRegisterService {
     private headers = new Headers({'content-type': 'application/json'});
 
-    constructor(private _http : Http){}
+    constructor(private _http: Http){}
     
     pushUser(registerUser:RegisterUser){
         console.log("submittin user  "+JSON.stringify(registerUser));

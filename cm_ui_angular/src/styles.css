@@ -18,3 +18,8 @@ h1 {
   height : 25px !important;
   width : 90%;
 }
+
+button.link {
+  background: none;
+  border: none;
+}

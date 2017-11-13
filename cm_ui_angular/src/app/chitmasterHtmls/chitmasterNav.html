@@ -10,11 +10,12 @@
           <a class="navbar-brand" href="#">ChitMaster</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a routerLink="/register" routerLinkActive="active">Register</a></li>
-            <li><a href="/login">Login</a></li>
+          <ul class="nav navbar-nav navbar-right"> {{loggedIn}}
+            <li><a *ngIf="!isLoggedIn" routerLink="/register" routerLinkActive="active">Register</a></li>
+            <li><a *ngIf="!isLoggedIn" routerLink="/login">Login</a></li>
             <li><a href="#">Profile</a></li>
             <li><a href="#">Help</a></li>
+            <!--<li><a *ngIf="loggedIn" href="/login">Logout</a></li> -->
           </ul>
           
         </div>

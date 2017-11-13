@@ -18,14 +18,14 @@ loginForm: FormGroup;
 constructor(private formBuilder: FormBuilder,
 private loginService: chitmasterLoginService,
 private route: ActivatedRoute,
-private router: Router,){
+private router: Router){
 }
 
 ngOnInit(){
        this.loginForm=this.formBuilder.group(
         {
-            username : ['vishl',[Validators.required]],
-            password : ['',[Validators.required]]
+            username : ['suruaithal@gmail.com',[Validators.required]],
+            password : ['shruthi123',[Validators.required]]
         }
     )       
 }
@@ -33,9 +33,10 @@ ngOnInit(){
 
 onSubmit(){
         console.log("hi it is here"+  JSON.stringify(this.loginForm.value)) ;
-       this.loginService.authenticate(this.loginForm.value).subscribe(
+        this.loginService.authenticate(this.loginForm.value).subscribe(
             data  => {
                         this.router.navigate(["dashboard"]);
+
             },
             error => {
                 console.log("Error for the User");

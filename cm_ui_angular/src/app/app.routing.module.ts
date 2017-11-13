@@ -6,7 +6,9 @@ import { chitmasterHomeComponent} from './chitmasterComponent/chitmaster-home.co
 import { ChitmasterLoginComponent } from './chitmasterComponent/chitmaster-login-component'; 
 import { ChitmasterDashBoardComponent } from './chitmasterComponent/chitmasterDashBoard/chitmaster-dashboard.component';
 import { ChitmasterCreateGroupComponent } from './chitmasterComponent/chitmasterGroup/chitmaster-creategroup.component';
-
+import { ChitmasterGroupDetailComponent } from './chitmasterComponent/chitmasterGroupDetail/chitmaster-groupdetail.component';
+import { ChitmasterBiddingHomeComponent } from './chitmasterComponent/chitmasterBidding/cm-bidding-home.component';
+import { BiddingObservingComponent } from './chitmasterComponent/chitmasterBidding/cm-bidding-update.component';
 const routes:Routes = [
     {
     path:'home',
@@ -25,6 +27,14 @@ const routes:Routes = [
     {
         path:'creategroup',
         component: ChitmasterCreateGroupComponent
+    },
+    {
+      path:'dashboard/:chitGroupId',
+      component: ChitmasterGroupDetailComponent
+    },
+    {
+      path:'biddinghome/:chitGroupId',
+      component: ChitmasterBiddingHomeComponent 
     }
   ];
 
@@ -34,5 +44,5 @@ const routes:Routes = [
   })    
 
   export class AppRoutingModule {}
-  export const routingComponents = [ChitmasterRegisterUserComponent,chitmasterHomeComponent,ChitmasterLoginComponent,ChitmasterDashBoardComponent,ChitmasterCreateGroupComponent]
+  export const routingComponents = [ChitmasterRegisterUserComponent,chitmasterHomeComponent,ChitmasterLoginComponent,ChitmasterDashBoardComponent,ChitmasterCreateGroupComponent,ChitmasterGroupDetailComponent,ChitmasterBiddingHomeComponent,BiddingObservingComponent]
 

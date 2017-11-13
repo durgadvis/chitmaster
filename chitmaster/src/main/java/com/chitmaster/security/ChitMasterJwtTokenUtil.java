@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
@@ -23,6 +25,16 @@ public class ChitMasterJwtTokenUtil {
 
 	public void setSecret(String secret) {
 		this.secret = secret;
+	}
+
+	public String getUserNameFromRequest(HttpServletRequest request) {
+        String header = request.getHeader("Authorization");
+        if (header == null || !header.startsWith("Bearer ")) {
+            throw new JwtTokenMissingException("No JWT token found in request headers");
+        }
+
+        String authToken = header.substring(7);
+		return getUsernameFromToken(authToken);
 	}
 
 	public void createAuthoritiesForUser(ChitMasterJwtUser user) {

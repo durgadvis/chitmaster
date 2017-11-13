@@ -1,0 +1,31 @@
+<div>
+    <div *ngIf="groupDetail" class="container">
+    <div>
+        Group {{groupDetail.groupName}} 
+    </div>
+        <div class="col-md-4" >
+           <label> Chit Value : </label> {{groupDetail.chitValue}}
+            <label>Commission Percent : </label> {{groupDetail.commissionPercent}}
+            <table *ngFor="let premiumDetails of groupDetail.listPremiumDetails" class="table table-bordered">
+              
+              <tr>
+                <td>
+                    {{premiumDetails.user.register.firstName}} {{premiumDetails.user.register.lastName}}
+                </td>
+                <td>
+                    {{premiumDetails.user.register.emailId}}
+                </td>
+                <td>
+                    {{premiumDetails.user.isHost}}    
+                </td>    
+               </tr>
+            </table>
+            Your monthly premium to be paid is : {{groupDetail.monthlyPremium}}
+        </div>
+        <div>
+        <label>Please click here to join the bidding </label>
+        <a class="btn btn-default" (click)="onClick(groupDetail)"> Join bidding </a>
+        </div>
+    </div>
+
+</div>

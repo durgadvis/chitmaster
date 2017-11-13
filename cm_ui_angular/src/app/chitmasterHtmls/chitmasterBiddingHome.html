@@ -1,0 +1,35 @@
+<div>
+        List of Users in the Group
+        
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    Name
+                </th> 
+                <th>
+                    Bidding
+                </th>
+            </tr>
+                <tr  *ngFor="let entry of initialBiddingMap | keys;let i=index">
+                    <td>
+                            {{entry.key}}
+                    </td>
+                    <div *ngIf="curruser == entry.key">
+                        <form>
+                            <td>
+                        
+                               <input  #updatedValue (keyup.enter)="bidSubmit(updatedValue.value)" value="{{entry.value}}"> 
+                            </td>
+                            <td>
+                                <button  (click)="bidSubmit(updatedValue.value)">Bid </button>
+                            </td>
+                        </form>
+                    </div>
+                    <td *ngIf="curruser != entry.key">
+                        {{entry.value}}
+                    </td>
+                </tr> 
+        </table> 
+
+        <obs-comp></obs-comp>
+</div>   
